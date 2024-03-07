@@ -90,6 +90,8 @@ public class Application {
 
 Execute a policy given an input
 
+![Diagram](../../images/executePolicyWithInput.svg)
+
 ### Example Usage
 
 ```java
@@ -169,6 +171,8 @@ public class Application {
 ## health
 
 The health API endpoint executes a simple built-in policy query to verify that the server is operational. Optionally it can account for bundle activation as well (useful for “ready” checks at startup).
+
+![Diagram](../../images/health.svg)
 
 ### Example Usage
 
