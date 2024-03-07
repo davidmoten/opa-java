@@ -15,6 +15,8 @@ Enterprise OPA documentation
 
 Execute a policy
 
+![Diagram](../../images/executePolicy.svg)
+
 ### Example Usage
 
 ```java
