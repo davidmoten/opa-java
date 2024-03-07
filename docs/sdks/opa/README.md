@@ -15,7 +15,174 @@ Enterprise OPA documentation
 
 Execute a policy
 
-![Diagram](../../images/executePolicy.svg)
+```mermaid
+classDiagram
+
+
+class `result#46;5` {
+  value : decimal
+}
+
+class `provenance#46;1` {
+  <<Parameter>>
+  value : boolean
+}
+
+class `ClientError` {
+  code : string
+  message : string
+}
+
+class `ClientError#46;errors#46;location` {
+  file : string
+  row : integer
+  col : integer
+}
+
+class `executePolicy` {
+  <<Path>>
+  <<GET #47;v1#47;data#47;#123;path#125;>>
+}
+
+class `explain`{
+  <<Parameter>>
+  notes
+  fails
+  full
+  debug
+}
+
+class `BadRequest` {
+  <<Response>>
+}
+
+class `result`
+
+class `GzipAcceptEncoding`{
+  <<Parameter>>
+  gzip
+}
+
+class `result#46;3` {
+  value : integer
+}
+
+class `ServerError#46;1` {
+  <<Response>>
+}
+
+class `ServerError`
+
+class `result#46;1` {
+  value : boolean
+}
+
+class `pretty` {
+  <<Parameter>>
+  value : boolean
+}
+
+class `SuccessfulPolicyEvaluation` {
+  <<Response>>
+  metrics : string -> string
+  decision_id : string #91;O#93;
+}
+
+class `provenance` {
+  version : string #91;O#93;
+  build_commit : string #91;O#93;
+  build_timestamp : timestamp #91;O#93;
+  build_host : string #91;O#93;
+  bundles : string -> string
+}
+
+class `strict-builtin-errors` {
+  <<Parameter>>
+  value : boolean
+}
+
+class `policyPath` {
+  <<Parameter>>
+  value : string
+}
+
+class `result#46;2` {
+  value : string
+}
+
+class `ClientError#46;errors` {
+  code : string
+  message : string
+}
+
+class `metrics` {
+  <<Parameter>>
+  value : boolean
+}
+
+class `instrument` {
+  <<Parameter>>
+  value : boolean
+}
+
+class `result#46;4`
+
+class `result#46;6` {
+  value : map
+}
+
+class `result#46;4#46;1`
+
+`result#46;4` --> "*" `result#46;4#46;1`
+
+`result#46;1` --|> `result`
+
+`result#46;2` --|> `result`
+
+`result#46;3` --|> `result`
+
+`result#46;4` --|> `result`
+
+`result#46;5` --|> `result`
+
+`result#46;6` --|> `result`
+
+`ClientError#46;errors` *--> "0..1" `ClientError#46;errors#46;location`  :  location
+
+`ClientError` --> "*" `ClientError#46;errors`  :  errors
+
+`ServerError` --> "1" `ClientError`
+
+`SuccessfulPolicyEvaluation` --> "0..1" `result`
+
+`SuccessfulPolicyEvaluation` --> "0..1" `provenance`
+
+`BadRequest` --> "1" `ClientError`
+
+`ServerError#46;1` --> "1" `ServerError`
+
+`executePolicy` --> "1" `policyPath`  :  path
+
+`executePolicy` --> "1" `GzipAcceptEncoding`  :  Accept-Encoding
+
+`executePolicy` --> "1" `pretty`  :  pretty
+
+`executePolicy` --> "1" `provenance#46;1`  :  provenance
+
+`executePolicy` --> "1" `explain`  :  explain
+
+`executePolicy` --> "1" `metrics`  :  metrics
+
+`executePolicy` --> "1" `instrument`  :  instrument
+
+`executePolicy` --> "1" `strict-builtin-errors`  :  strict-builtin-errors
+
+`executePolicy` ..> "1" `SuccessfulPolicyEvaluation`  :  200
+
+`executePolicy` ..> "1" `BadRequest`  :  400
+
+`executePolicy` ..> "1" `ServerError#46;1`  :  500
+```
 
 ### Example Usage
 
@@ -90,7 +257,188 @@ public class Application {
 
 Execute a policy given an input
 
-![Diagram](../../images/executePolicyWithInput.svg)
+```mermaid
+classDiagram
+
+
+class `result#46;5` {
+  value : decimal
+}
+
+class `provenance#46;1` {
+  <<Parameter>>
+  value : boolean
+}
+
+class `ClientError` {
+  code : string
+  message : string
+}
+
+class `ClientError#46;errors#46;location` {
+  file : string
+  row : integer
+  col : integer
+}
+
+class `BadRequest` {
+  <<Response>>
+}
+
+class `explain`{
+  <<Parameter>>
+  notes
+  fails
+  full
+  debug
+}
+
+class `GzipAcceptEncoding`{
+  <<Parameter>>
+  gzip
+}
+
+class `result`
+
+class `result#46;3` {
+  value : integer
+}
+
+class `executePolicyWithInput` {
+  <<Path>>
+  <<POST #47;v1#47;data#47;#123;path#125;>>
+}
+
+class `ServerError#46;1` {
+  <<Response>>
+}
+
+class `ServerError`
+
+class `result#46;1` {
+  value : boolean
+}
+
+class `pretty` {
+  <<Parameter>>
+  value : boolean
+}
+
+class `SuccessfulPolicyEvaluation` {
+  <<Response>>
+  metrics : string -> string
+  decision_id : string #91;O#93;
+}
+
+class `provenance` {
+  version : string #91;O#93;
+  build_commit : string #91;O#93;
+  build_timestamp : timestamp #91;O#93;
+  build_host : string #91;O#93;
+  bundles : string -> string
+}
+
+class `strict-builtin-errors` {
+  <<Parameter>>
+  value : boolean
+}
+
+class `result#46;2` {
+  value : string
+}
+
+class `policyPath` {
+  <<Parameter>>
+  value : string
+}
+
+class `executePolicyWithInput Request` {
+  <<RequestBody>>
+  input : string -> string
+}
+
+class `ClientError#46;errors` {
+  code : string
+  message : string
+}
+
+class `GzipContentEncoding`{
+  <<Parameter>>
+  gzip
+}
+
+class `metrics` {
+  <<Parameter>>
+  value : boolean
+}
+
+class `instrument` {
+  <<Parameter>>
+  value : boolean
+}
+
+class `result#46;4`
+
+class `result#46;6` {
+  value : map
+}
+
+class `result#46;4#46;1`
+
+`result#46;4` --> "*" `result#46;4#46;1`
+
+`result#46;1` --|> `result`
+
+`result#46;2` --|> `result`
+
+`result#46;3` --|> `result`
+
+`result#46;4` --|> `result`
+
+`result#46;5` --|> `result`
+
+`result#46;6` --|> `result`
+
+`ClientError#46;errors` *--> "0..1" `ClientError#46;errors#46;location`  :  location
+
+`ClientError` --> "*" `ClientError#46;errors`  :  errors
+
+`ServerError` --> "1" `ClientError`
+
+`SuccessfulPolicyEvaluation` --> "0..1" `result`
+
+`SuccessfulPolicyEvaluation` --> "0..1" `provenance`
+
+`BadRequest` --> "1" `ClientError`
+
+`ServerError#46;1` --> "1" `ServerError`
+
+`executePolicyWithInput` --> "1" `policyPath`  :  path
+
+`executePolicyWithInput` --> "1" `GzipContentEncoding`  :  Content-Encoding
+
+`executePolicyWithInput` --> "1" `GzipAcceptEncoding`  :  Accept-Encoding
+
+`executePolicyWithInput` --> "1" `pretty`  :  pretty
+
+`executePolicyWithInput` --> "1" `provenance#46;1`  :  provenance
+
+`executePolicyWithInput` --> "1" `explain`  :  explain
+
+`executePolicyWithInput` --> "1" `metrics`  :  metrics
+
+`executePolicyWithInput` --> "1" `instrument`  :  instrument
+
+`executePolicyWithInput` --> "1" `strict-builtin-errors`  :  strict-builtin-errors
+
+`executePolicyWithInput` ..> "1" `SuccessfulPolicyEvaluation`  :  200
+
+`executePolicyWithInput` ..> "1" `BadRequest`  :  400
+
+`executePolicyWithInput` ..> "1" `ServerError#46;1`  :  500
+
+`executePolicyWithInput` --> "1" `executePolicyWithInput Request`
+```
 
 ### Example Usage
 
@@ -172,7 +520,60 @@ public class Application {
 
 The health API endpoint executes a simple built-in policy query to verify that the server is operational. Optionally it can account for bundle activation as well (useful for “ready” checks at startup).
 
-![Diagram](../../images/health.svg)
+```mermaid
+classDiagram
+
+
+class `exclude-plugin#46;1` {
+  <<Parameter>>
+  value : string
+}
+
+class `UnhealthyServer` {
+  code : string #91;O#93;
+}
+
+class `health` {
+  <<Path>>
+  <<GET #47;health>>
+}
+
+class `bundles` {
+  <<Parameter>>
+  value : boolean
+}
+
+class `plugins` {
+  <<Parameter>>
+  value : boolean
+}
+
+class `UnhealthyServer#46;1` {
+  <<Response>>
+}
+
+class `exclude-plugin` {
+  <<Parameter>>
+}
+
+class `HealthyServer` {
+  <<Response>>
+}
+
+`exclude-plugin` --> "*" `exclude-plugin#46;1`
+
+`UnhealthyServer#46;1` --> "1" `UnhealthyServer`
+
+`health` --> "1" `bundles`  :  bundles
+
+`health` --> "1" `plugins`  :  plugins
+
+`health` --> "1" `exclude-plugin`  :  exclude-plugin
+
+`health` ..> "1" `HealthyServer`  :  200
+
+`health` ..> "1" `UnhealthyServer#46;1`  :  500
+```
 
 ### Example Usage
 
